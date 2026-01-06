@@ -4,6 +4,7 @@ import Image from "next/image"
 import { ArrowUpRight, Menu, Sparkles, Users, FileText, MapPin, X } from "lucide-react"
 import { PillButton } from "@/components/PillButton"
 import { useState } from "react"
+import { AnimatePresence, motion } from "framer-motion"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -31,7 +32,11 @@ export default function Home() {
       <div className="film-grain" aria-hidden="true"></div>
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex items-center justify-between bg-[#0a0a0a]/90 backdrop-blur-sm">
-        <a href="/" className="text-xl font-bold tracking-tight">
+        <a
+          href="/"
+          className={`text-xl font-bold tracking-tight transition-opacity duration-200 ${menuOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+        >
           Meraki
         </a>
         <button
@@ -43,16 +48,90 @@ export default function Home() {
       </header>
 
       {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-20 px-8">
-          <nav className="flex flex-col gap-6 text-2xl">
-            <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">About</a>
-            <a href="#who" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">Who Can Come</a>
-            <a href="#how" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">How It Works</a>
-            <a href="https://luma.com/merakiuoft" target="_blank" rel="noopener noreferrer" className="hover:text-[#B85C38] transition-colors">Attend a Session</a>
-          </nav>
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 px-6 md:px-12 flex flex-col"
+          >
+            <motion.nav
+              className="flex flex-col gap-8 text-3xl md:text-4xl font-serif text-[#f5f5f5]"
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={{
+                open: {
+                  transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+                },
+                closed: {
+                  transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                }
+              }}
+            >
+              {[
+                { href: "#about", label: "About" },
+                { href: "#who", label: "Who Can Come" },
+                { href: "#how", label: "How It Works" },
+                { href: "https://luma.com/merakiuoft", label: "Attend a Session", external: true }
+              ].map((link) => (
+                <motion.div
+                  key={link.href}
+                  variants={{
+                    open: { y: 0, opacity: 1 },
+                    closed: { y: 20, opacity: 0 }
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                  <a
+                    href={link.href}
+                    onClick={() => setMenuOpen(false)}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    className="hover:text-[#B85C38] transition-colors inline-block"
+                  >
+                    {link.label}
+                  </a>
+                </motion.div>
+              ))}
+            </motion.nav>
+
+            {/* Animated Meraki Text */}
+            <motion.div
+              className="absolute right-0 md:right-10 top-1/2 -translate-y-1/2 rotate-90 origin-center pointer-events-none select-none"
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+              variants={{
+                visible: { transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
+                hidden: { transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+              }}
+            >
+              {Array.from("Meraki").map((char, i) => (
+                <motion.span
+                  key={i}
+                  className="inline-block text-[10vh] md:text-[18vh] leading-none font-serif font-bold text-transparent"
+                  style={{
+                    WebkitTextStroke: "1px rgba(245, 245, 245, 0.15)",
+                    transform: "scaleY(2.5)"
+                  }}
+                  variants={{
+                    visible: { opacity: 1, y: 0 },
+                    hidden: { opacity: 0, y: -40 }
+                  }}
+                  transition={{ type: "spring", damping: 20, stiffness: 100 }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* Close button is handled by header z-index */}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-2 relative">
