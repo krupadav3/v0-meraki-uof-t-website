@@ -1,334 +1,408 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ArrowRight, Clapperboard, X, Instagram, Mail } from "lucide-react"
 import Image from "next/image"
+import { ArrowUpRight, Menu, Sparkles, Users, FileText, MapPin, X } from "lucide-react"
+import { PillButton } from "@/components/PillButton"
 import { useState } from "react"
 
 export default function Home() {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
-
-  const images = [
-    { src: "/1517_guy.jpg", alt: "Meraki session workspace" },
-    { src: "/intro_speech.jpg", alt: "Introduction speech at Meraki" },
-    { src: "/meraki_wall_notes.jpg", alt: "Meraki brainstorming wall with sticky notes" },
-    { src: "/group_talking.jpg", alt: "Group networking and conversations" },
-    { src: "/group_talking_2.jpg", alt: "More networking and conversations" },
-    { src: "/meraki_cohosts_2025.jpg", alt: "Meraki 2025 co-hosts team" },
+  const [menuOpen, setMenuOpen] = useState(false)
+  const galleryImages = [
+    { src: "/new_images/DSCN0827.JPG", alt: "Workshop table scene" },
+    { src: "/new_images/IMG_4169.jpg", alt: "Participants collaborating" },
+    { src: "/new_images/IMG_4176.jpg", alt: "Focused work session" },
+    { src: "/new_images/IMG_4179.jpg", alt: "Shared workspace moment" },
+    { src: "/new_images/IMG_5985.JPG", alt: "Community gathering" },
+    { src: "/new_images/IMG_6420.JPG", alt: "Creative work in progress" },
+    { src: "/1517_guy.jpg", alt: "Community member working" },
+    { src: "/group_talking.jpg", alt: "Group discussion" },
+    { src: "/intro_speech.jpg", alt: "Introduction speech" },
+    { src: "/group_talking_2.jpg", alt: "Networking" },
+    { src: "/demo_session_1.jpg", alt: "Session introduction" },
+    { src: "/demo_session_2.jpg", alt: "Work session" },
+    { src: "/demo_session_row_1.jpg", alt: "Project tables" },
+    { src: "/demo_session_row_2.jpg", alt: "Collaborative working" },
+    { src: "/meraki_wall_notes.jpg", alt: "Wall notes and ideas" },
   ]
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
-      {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-7xl max-h-full">
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
-            >
-              <X className="w-8 h-8" />
-            </button>
-            <Image
-              src={selectedImage || "/placeholder.svg"}
-              alt="Full size image"
-              width={1200}
-              height={900}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
-            />
-          </div>
+    <div className="min-h-screen bg-[#0a0a0a] text-[#f5f5f5] overflow-x-hidden">
+      {/* Film Grain Overlay */}
+      <div className="film-grain" aria-hidden="true"></div>
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 px-6 py-5 flex items-center justify-between bg-[#0a0a0a]/90 backdrop-blur-sm">
+        <a href="/" className="text-xl font-bold tracking-tight">
+          Meraki
+        </a>
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="w-10 h-10 rounded-full border border-[#333] flex items-center justify-center hover:bg-white/10 transition-colors"
+        >
+          {menuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+        </button>
+      </header>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-20 px-8">
+          <nav className="flex flex-col gap-6 text-2xl">
+            <a href="#about" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">About</a>
+            <a href="#who" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">Who Can Come</a>
+            <a href="#how" onClick={() => setMenuOpen(false)} className="hover:text-[#B85C38] transition-colors">How It Works</a>
+            <a href="https://luma.com/merakiuoft" target="_blank" rel="noopener noreferrer" className="hover:text-[#B85C38] transition-colors">Attend a Session</a>
+          </nav>
         </div>
       )}
 
-      <div className="fixed inset-0 overflow-hidden pointer-events-none z-5">
-        {Array.from({ length: 50 }).map((_, i) => (
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-2 relative">
+        {/* Decorative wavy lines background */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+          <svg className="absolute bottom-0 left-0 w-full h-1/2" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none">
+            {[...Array(8)].map((_, i) => (
+              <path
+                key={i}
+                d={`M0,${200 + i * 25} Q360,${150 + i * 25} 720,${200 + i * 25} T1440,${200 + i * 25}`}
+                stroke="#333"
+                strokeWidth="1"
+                fill="none"
+              />
+            ))}
+          </svg>
+        </div>
+
+        <div className="max-w-6xl mx-auto w-full relative z-10">
+          {/* Large Logo */}
+          <div className="mb-8">
+            <Image
+              src="/meraki-logo-transparent-cropped.png"
+              alt="Meraki"
+              width={600}
+              height={150}
+              className="h-auto w-auto max-h-64 md:max-h-80 lg:max-h-96 img-vintage"
+              priority
+            />
+          </div>
+
+          {/* Tagline */}
+          <div className="max-w-xl mb-10">
+            <p className="text-xl md:text-2xl leading-relaxed text-gray-300">
+              Find your rhythm, co-work, and build alongside others.{" "}
+              <em className="font-normal text-[#f5f5f5]">passion projects</em> with likeminded people.
+            </p>
+          </div>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-4 mb-4">
+            <a
+              href="https://luma.com/merakiuoft"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#f5f5f5] text-[#0a0a0a] rounded-full text-sm font-medium tracking-wide uppercase hover:bg-gray-200 transition-colors"
+            >
+              <ArrowUpRight className="w-4 h-4" />
+              Attend a Session
+            </a>
+            <a
+              href="#about"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-[#444] rounded-full text-sm font-medium tracking-wide uppercase hover:bg-white/10 transition-colors"
+            >
+              <Sparkles className="w-4 h-4" />
+              Dive Deeper
+            </a>
+          </div>
+
+          {/* Current Art Credit */}
+          {/* <div className="absolute bottom-8 right-6 md:right-12 lg:right-20 text-right text-sm">
+            <p className="text-xs tracking-[0.2em] uppercase text-gray-500 mb-1">Current Art</p>
+            <p className="text-gray-400">"Side Project", by the Meraki Team</p>
+          </div> */}
+        </div>
+      </section>
+
+      {/* Group Photo Section */}
+      <section className="relative -mt-12 md:-mt-16">
+        <div className="relative">
           <div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${2 + Math.random() * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-4 z-10">
-        {/* Floating decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 left-10 w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-          <div className="absolute top-40 right-20 w-3 h-3 bg-pink-400 rounded-full animate-bounce"></div>
-          <div className="absolute bottom-40 left-20 w-2 h-2 bg-yellow-400 rounded-full animate-ping"></div>
-          <div className="absolute top-60 left-1/3 w-1 h-1 bg-white rounded-full animate-pulse"></div>
-          <div className="absolute bottom-60 right-1/3 w-2 h-2 bg-cyan-400 rounded-full animate-bounce"></div>
-        </div>
-
-        <div className="text-center max-w-4xl mx-auto relative z-10">
-          <div className="mb-16 transform hover:scale-105 transition-transform duration-300 relative">
+            className="w-full mt-0 mb-10 overflow-hidden"
+          >
             <Image
-              src="/meraki-logo-original.png"
-              alt="Meraki UofT Logo"
-              width={1200}
-              height={360}
-              className="mx-auto h-96 md:h-[32rem] lg:h-[36rem] xl:h-[40rem] object-contain relative z-0"
-              style={{ mixBlendMode: "screen" }}
+              src="/selfie_kickoff-extended.png"
+              alt="Meraki community group photo"
+              width={1920}
+              height={700}
+              className="w-full h-auto object-cover img-vintage-strong"
+              style={{ objectPosition: 'center center' }}
+              priority
             />
           </div>
-
-          <div className="mb-12">
-            <p className="text-white text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
-              Meraki is a weekly drop in co-working space carved out for you to work on personal projects that excite
-              you—whether that's art, music, code, research, or something totally unexpected :)
-            </p>
-          </div>
-
-          {/* Playful badge */}
-          <div className="mb-8">
-            <Badge className="bg-white text-black border-gray-300 px-6 py-2 text-lg font-medium">
-              Friend of Socratica ⁂
-            </Badge>
-          </div>
-
-          {/* Attend session button */}
-          <div className="mb-16">
-            <Button
-              asChild
-              size="lg"
-              className="bg-white hover:bg-gray-100 text-black font-bold px-12 py-6 text-xl rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-white/25"
-            >
-              <a href="https://luma.com/merakiuoft" target="_blank" rel="noopener noreferrer">
-                attend a session
-                <ArrowRight className="ml-3 h-6 w-6" />
-              </a>
-            </Button>
-          </div>
-
-          {/* Greek definition of meraki */}
-          <div className="text-center">
-            <div className="mb-4">
-              <span className="text-4xl font-light text-gray-300">me-ra-ki</span>
-              <span className="text-lg text-gray-500 ml-3">(Greek)</span>
-            </div>
-            <p className="text-lg text-white max-w-2xl mx-auto leading-relaxed">
-              the essence of yourself. Embodying the idea of leaving a piece of your soul, creativity, and love in
-              everything you do
-            </p>
-          </div>
         </div>
+
+        {/* What We Are Button */}
+        {/* <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+          <a href="#about">
+            <PillButton icon={<Heart className="w-4 h-4" />} color="red">
+              What We Are
+            </PillButton>
+          </a>
+        </div> */}
       </section>
 
-      <section className="py-20 px-4 relative">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black mb-12 text-white">
-            what we <span className="text-pink-400">are</span>
+      {/* What We Are Section */}
+      <section id="about" className="py-32 px-6 md:px-12 lg:px-20 relative">
+        {/* Decorative wavy lines */}
+        <div className="absolute left-0 top-1/4 w-1/3 h-1/2 opacity-10 pointer-events-none">
+          <svg viewBox="0 0 200 400" fill="none" className="w-full h-full">
+            {[...Array(12)].map((_, i) => (
+              <path
+                key={i}
+                d={`M${10 + i * 15},0 Q${20 + i * 15},200 ${10 + i * 15},400`}
+                stroke="#444"
+                strokeWidth="1"
+                fill="none"
+              />
+            ))}
+          </svg>
+        </div>
+
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+          <h2 className="text-3xl md:text-5xl leading-tight md:leading-snug">
+            A live, IRL co-working session for people who want to <em>make stuff</em>.
           </h2>
 
-          <Card className="bg-gray-900/50 border-gray-800 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <p className="text-2xl leading-relaxed text-white font-light">
-                a collective of builders of all kinds, artists, filmmakers, engineers, coders, learners, researchers,
-                founders, designers
-              </p>
-            </CardContent>
-          </Card>
+          <p className="mt-10 text-base md:text-lg text-gray-300 max-w-xl mx-auto font-serif leading-relaxed">
+            We host in Toronto and bring together folks working on passion projects.
+          </p>
+          <p className="mt-4 text-base md:text-lg text-gray-300 max-w-xl mx-auto font-serif leading-relaxed">
+            If that sounds like you, <a href="https://luma.com/merakiuoft" className="underline hover:text-[#B85C38] transition-colors">you're invited</a>.
+          </p>
         </div>
       </section>
 
-      <section className="py-2 px-4 relative">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-black mb-12 text-white">
-            How it <span className="text-pink-400">Works</span>
-          </h2>
-
-          <div className="space-y-8">
-            <div className="flex items-start gap-4 justify-center">
-              <div className="bg-pink-400 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                1
-              </div>
-              <p className="text-white text-lg leading-relaxed text-center max-w-md">
-                bring your tools + crafts (or just yourself)
-              </p>
-            </div>
-
-            <div className="flex items-start gap-4 justify-center">
-              <div className="bg-pink-400 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                2
-              </div>
-              <p className="text-white text-lg leading-relaxed text-center max-w-md">
-                engage in pomodoro style deep-work (2 deep sessions of 50 mins, 10 mins in between + snacks)
-              </p>
-            </div>
-
-            <div className="flex items-start gap-4 justify-center">
-              <div className="bg-pink-400 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm flex-shrink-0 mt-1">
-                3
-              </div>
-              <p className="text-white text-lg leading-relaxed text-center max-w-md">
-                showcase your ideas & progress via demos :)
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            <div
-              className="aspect-[4/3] overflow-hidden rounded-lg border border-gray-700 cursor-pointer"
-              onClick={() => setSelectedImage("/demo_session_row_1.jpg")}
-            >
-              <Image
-                src="/demo_session_row_1.jpg"
-                alt="Demo session presentation"
-                width={300}
-                height={225}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 relative z-10"
-              />
-            </div>
-            <div
-              className="aspect-[4/3] overflow-hidden rounded-lg border border-gray-700 cursor-pointer"
-              onClick={() => setSelectedImage("/demo_session_row_2.jpg")}
-            >
-              <Image
-                src="/demo_session_row_2.jpg"
-                alt="Collaborative workspace session"
-                width={300}
-                height={225}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 relative z-10"
-              />
-            </div>
-            <div
-              className="aspect-[4/3] overflow-hidden rounded-lg border border-gray-700 cursor-pointer"
-              onClick={() => setSelectedImage("/demo_session_row_3.jpg")}
-            >
-              <Image
-                src="/demo_session_row_3.jpg"
-                alt="Group demo and feedback session"
-                width={300}
-                height={225}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 relative z-10"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 px-4 bg-gray-950/50">
+      {/* Who Can Come Section */}
+      <section id="who" className="py-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-3 bg-pink-500/30 border border-pink-400/50 rounded-full px-8 py-4 mb-6">
-              <Clapperboard className="w-6 h-6 text-pink-100" />
-              <p className="text-pink-100 text-xl font-bold">P.S. Meraki is back for Season 3 and you're invited!</p>
-            </div>
-          </div>
-
-          <div className="mb-16">
-            <h3 className="text-3xl font-bold text-center mb-2 text-white">Meraki Kick-Off 2025</h3>
-            <p className="text-center text-white text-sm mb-8">Sponsored by: 1517 and Entrepreneurs First</p>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {images.slice(0, 5).map((image, index) => (
-                <div key={index} className="space-y-4">
-                  <div
-                    className="aspect-[4/3] overflow-hidden rounded-2xl border border-gray-700 cursor-pointer"
-                    onClick={() => setSelectedImage(image.src)}
-                  >
-                    <Image
-                      src={image.src || "/placeholder.svg"}
-                      alt={image.alt}
-                      width={400}
-                      height={300}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 relative z-10"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 flex justify-center">
-              <div className="max-w-md">
-                <div
-                  className="aspect-[4/3] overflow-hidden rounded-2xl border border-gray-700 cursor-pointer"
-                  onClick={() => setSelectedImage(images[5].src)}
-                >
-                  <Image
-                    src="/meraki_cohosts_2025.jpg"
-                    alt="Meraki 2025 co-hosts team"
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300 relative z-10"
-                  />
-                </div>
-                <div className="text-center mt-4">
-                  <p className="text-gray-400 text-sm">
-                    Our 5 co-hosts for Season 3: Kenny Guo, Richa Pandya, Anupam Chettimada, Samantha Chan, Krupa Dave
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="text-center mt-12">
-            <p className="text-gray-400 text-lg">more memories coming soon...</p>
-            <div className="mt-8 flex justify-center items-center gap-8">
-              <a
-                href="https://www.instagram.com/meraki_uoft/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-pink-400 hover:text-pink-300 transition-colors transform hover:scale-110 duration-300"
-              >
-                <Instagram className="w-8 h-8" />
-              </a>
-              <a
-                href="https://x.com/merakiuoft"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-cyan-400 hover:text-cyan-300 transition-colors transform hover:scale-110 duration-300"
-              >
-                <X className="w-8 h-8" />
-              </a>
-              <a
-                href="https://luma.com/merakiuoft"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-yellow-400 hover:text-yellow-300 transition-colors transform hover:scale-110 duration-300"
-              >
-                <svg className="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                </svg>
-              </a>
-              <a
-                href="mailto:merakiatuoft@gmail.com"
-                className="text-white hover:text-gray-300 transition-colors transform hover:scale-110 duration-300"
-              >
-                <Mail className="w-8 h-8" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <footer className="py-16 px-4 border-t border-gray-800">
-        <div className="max-w-4xl mx-auto text-center">
           <div className="mb-8">
-            <Image
-              src="/meraki-logo-original.png"
-              alt="Meraki UofT Logo"
-              width={200}
-              height={60}
-              className="h-12 w-auto mx-auto opacity-80 relative z-10"
-              style={{ mixBlendMode: "screen" }}
-            />
+            <PillButton icon={<Users className="w-4 h-4" />} color="red">
+              Who Can Come
+            </PillButton>
           </div>
 
-          <p className="text-gray-400 text-lg mb-8">
-            made with <span className="text-pink-400">♡</span> by the Meraki team
+          <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6 max-w-3xl">
+            Whether you're just starting out or far along, this is a place for <em>you</em> to make things.
+          </h2>
+
+          <p className="text-lg text-gray-400 mb-12 max-w-xl">
+            We know it can be intimidating to start (we've been there), but you'll be surrounded by others doing the same.
           </p>
 
-          <div className="flex justify-center gap-6">
-            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
-            <div className="w-2 h-2 bg-pink-400 rounded-full animate-pulse delay-100"></div>
-            <div className="w-2 h-2 bg-yellow-400 rounded-full animate-pulse delay-200"></div>
+        </div>
+      </section>
+
+      {/* How It Works Section */}
+      <section id="how" className="py-24 px-6 md:px-12 lg:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Join CTA */}
+            <div className="relative">
+              <div className="rounded-3xl border border-[#333] bg-[#121212] p-10 text-center">
+                <p className="text-sm uppercase tracking-[0.25em] text-gray-500 mb-6">Ready to join?</p>
+                <p className="text-xl md:text-2xl font-medium mb-8">
+                  Show up, share progress, and meet other makers.
+                </p>
+                <a
+                  href="https://luma.com/merakiuoft"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#B85C38] text-[#0a0a0a] rounded-full text-sm font-medium tracking-wide uppercase hover:bg-[#d06a40] transition-colors"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                  Join Us
+                </a>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div>
+              <div className="mb-8">
+                <PillButton icon={<FileText className="w-4 h-4" />} color="olive">
+                  How It Works
+                </PillButton>
+              </div>
+
+              <h2 className="text-3xl md:text-4xl leading-tight mb-6">
+                Introductions,<br />
+                two 50-min work blocks, ending with casual open <em>demos</em>
+              </h2>
+
+              <p className="text-xl text-[#8BA360] italic mb-6">
+                + snacks along the way.
+              </p>
+
+              <p className="text-gray-400 leading-relaxed">
+                The real magic is in the demos – whether you've got 3 bullet points on a Google Docs or a full-blown prototype, we want to see it.
+              </p>
+              <p className="text-gray-400 leading-relaxed mt-4">
+                It's a chance to share your work, get feedback, and celebrate progress.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-24 px-6 md:px-12 lg:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <PillButton icon={<Sparkles className="w-4 h-4" />} color="olive">
+              Gallery
+            </PillButton>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-4 max-w-4xl">
+            A growing wall of moments from Meraki nights.
+          </h2>
+          <p className="text-lg text-gray-400 mb-4 max-w-2xl">
+            People show up with sketches, laptops, canvases, and prototypes.
+          </p>
+          <p className="text-gray-400 mb-12 max-w-2xl">
+            This is what it looks like when the room is full of makers building side by side.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryImages.map((image) => (
+              <div
+                key={image.src}
+                className="aspect-[4/3] overflow-hidden rounded-2xl photo-fade"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={520}
+                  height={390}
+                  className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500 photo-fade-img"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Friend of Socratica Section */}
+      <section className="py-24 px-6 md:px-12 lg:px-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="inline-block mb-8 px-6 py-3 bg-[#151515] rounded-2xl border border-[#333]">
+            <p className="text-lg">
+              <a
+                href="https://www.socratica.info/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#B85C38] transition-colors"
+              >
+                Friend of Socratica ⁂
+              </a>
+            </p>
+          </div>
+
+          <p className="text-xl text-gray-400 mb-8">
+            We're part of a global network of co-working communities.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href="https://www.socratica.info/map?location=toronto-Meraki"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1a1a1a] border border-[#333] text-lg hover:bg-[#252525] transition-colors"
+            >
+              <MapPin className="w-3 h-3" />
+              Toronto, ON
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Season 3 Announcement */}
+      <section className="py-32 px-6 md:px-12 lg:px-20 relative overflow-hidden">
+        {/* Decorative background - kept subtle and contained */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,0 C30,20 70,20 100,0 L100,100 C70,80 30,80 0,100 Z" fill="none" stroke="#333" strokeWidth="0.5" />
+            <path d="M0,20 C30,40 70,40 100,20 L100,120" fill="none" stroke="#333" strokeWidth="0.5" />
+          </svg>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <div className="inline-block mb-6">
+            <span className="text-xs tracking-[0.2em] uppercase text-[#B85C38]">
+              P.S.
+            </span>
+          </div>
+
+          <h3 className="text-2xl md:text-4xl font-bold mb-6 leading-tight font-serif">
+            Meraki is back for <span className="italic text-[#D4B055] whitespace-nowrap">Season 3</span><br />
+            and you're invited!
+          </h3>
+
+          <p className="text-gray-400 mb-10 text-sm font-serif">
+            Sponsored by <span className="text-[#f5f5f5]">1517</span> and <span className="text-[#f5f5f5]">Entrepreneurs First</span>
+          </p>
+
+          <a
+            href="https://luma.com/merakiuoft"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-[#f5f5f5] text-[#0a0a0a] rounded-full font-medium tracking-wide hover:bg-white transition-colors"
+          >
+            <ArrowUpRight className="w-5 h-5" />
+            RSVP Now
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-16 px-6 md:px-12 lg:px-20 border-t border-[#222]">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            {/* Links */}
+            <div>
+              <h4 className="text-xs tracking-[0.2em] uppercase text-gray-500 mb-4">Connect</h4>
+              <div className="space-y-3">
+                <a href="https://www.instagram.com/meraki_uoft/" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-[#B85C38] transition-colors">Instagram</a>
+                <a href="https://x.com/merakiuoft" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-[#B85C38] transition-colors">X (Twitter)</a>
+                <a href="https://luma.com/merakiuoft" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-[#B85C38] transition-colors">Luma</a>
+                <a href="mailto:merakiatuoft@gmail.com" className="block text-gray-300 hover:text-[#B85C38] transition-colors">Email</a>
+              </div>
+            </div>
+
+            {/* More */}
+            <div>
+              <h4 className="text-xs tracking-[0.2em] uppercase text-gray-500 mb-4">More</h4>
+              <div className="space-y-3">
+                <a href="https://www.socratica.info/" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-[#B85C38] transition-colors">Socratica</a>
+                <a href="https://www.socratica.info/map" target="_blank" rel="noopener noreferrer" className="block text-gray-300 hover:text-[#B85C38] transition-colors">Find Your Node</a>
+              </div>
+            </div>
+
+            {/* Credits */}
+            <div>
+              <h4 className="text-xs tracking-[0.2em] uppercase text-gray-500 mb-4">Season 3 Co-hosts</h4>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                Kenny Guo, Richa Pandya, Anupam Chettimada, Samantha Chan, Krupa Dave
+              </p>
+            </div>
+          </div>
+
+          {/* Bottom */}
+          <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#222]">
+            <p className="text-gray-500 text-sm mb-4 md:mb-0">
+              made with <span className="text-[#B85C38]">♡</span> by the Meraki team
+            </p>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#B85C38]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#8BA360]"></span>
+              <span className="w-2 h-2 rounded-full bg-[#D4B055]"></span>
+            </div>
           </div>
         </div>
       </footer>
