@@ -118,8 +118,13 @@
 
 /* Image treatment - colored with slight warmth */
 .img-vintage {
-  filter: brightness(0.95) contrast(1.05) saturate(1.1);
+  filter: brightness(0.95) contrast(1.08) saturate(1.15) sepia(0.12);
 }
+
+.img-vintage-strong {
+  filter: brightness(0.9) contrast(1.25) saturate(1.35) sepia(0.35);
+}
+
 
 /* Brand color filter - blue, red, yellow, white, light blue */
 .img-brand-colors {

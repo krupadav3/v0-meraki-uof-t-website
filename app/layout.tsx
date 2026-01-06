@@ -14,7 +14,7 @@ const ebGaramond = EB_Garamond({
 export const metadata: Metadata = {
   title: "Meraki UofT - Creative Co-working Community",
   description:
-    "Meraki is a weekly drop-in co-working space at UofT for passion projects. An open collective of makers, artists, engineers, designers, writers, and everything in-between. Friend of Socratica.",
+    "Meraki is a weekly drop-in co-working space at UofT for passion projects. Friend of Socratica.",
   keywords: ["Meraki", "UofT", "co-working", "passion projects", "community", "Toronto", "Socratica"],
   openGraph: {
     title: "Meraki UofT - Creative Co-working Community",

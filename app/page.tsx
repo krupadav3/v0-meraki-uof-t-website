@@ -1,12 +1,29 @@
 "use client"
 
 import Image from "next/image"
-import { ArrowUpRight, Menu, Sparkles, Users, FileText, Heart, MapPin, X } from "lucide-react"
+import { ArrowUpRight, Menu, Sparkles, Users, FileText, MapPin, X } from "lucide-react"
 import { PillButton } from "@/components/PillButton"
 import { useState } from "react"
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const galleryImages = [
+    { src: "/new_images/DSCN0827.JPG", alt: "Workshop table scene" },
+    { src: "/new_images/IMG_4169.jpg", alt: "Participants collaborating" },
+    { src: "/new_images/IMG_4176.jpg", alt: "Focused work session" },
+    { src: "/new_images/IMG_4179.jpg", alt: "Shared workspace moment" },
+    { src: "/new_images/IMG_5985.JPG", alt: "Community gathering" },
+    { src: "/new_images/IMG_6420.JPG", alt: "Creative work in progress" },
+    { src: "/1517_guy.jpg", alt: "Community member working" },
+    { src: "/group_talking.jpg", alt: "Group discussion" },
+    { src: "/intro_speech.jpg", alt: "Introduction speech" },
+    { src: "/group_talking_2.jpg", alt: "Networking" },
+    { src: "/demo_session_1.jpg", alt: "Session introduction" },
+    { src: "/demo_session_2.jpg", alt: "Work session" },
+    { src: "/demo_session_row_1.jpg", alt: "Project tables" },
+    { src: "/demo_session_row_2.jpg", alt: "Collaborative working" },
+    { src: "/meraki_wall_notes.jpg", alt: "Wall notes and ideas" },
+  ]
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f5f5] overflow-x-hidden">
@@ -38,7 +55,7 @@ export default function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-16 relative">
+      <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-24 pb-2 relative">
         {/* Decorative wavy lines background */}
         <div className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
           <svg className="absolute bottom-0 left-0 w-full h-1/2" viewBox="0 0 1440 400" fill="none" preserveAspectRatio="none">
@@ -62,7 +79,7 @@ export default function Home() {
               alt="Meraki"
               width={600}
               height={150}
-              className="h-auto w-auto max-h-64 md:max-h-80 lg:max-h-96"
+              className="h-auto w-auto max-h-64 md:max-h-80 lg:max-h-96 img-vintage"
               priority
             />
           </div>
@@ -70,13 +87,13 @@ export default function Home() {
           {/* Tagline */}
           <div className="max-w-xl mb-10">
             <p className="text-xl md:text-2xl leading-relaxed text-gray-300">
-              We host weekly co-working sessions for you to work on your{" "}
+              We run weekly co-working sessions where you can focus on your{" "}
               <em className="font-normal text-[#f5f5f5]">passion projects</em> with likeminded people.
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-wrap gap-4 mb-12">
+          <div className="flex flex-wrap gap-4 mb-4">
             <a
               href="https://luma.com/merakiuoft"
               target="_blank"
@@ -104,26 +121,20 @@ export default function Home() {
       </section>
 
       {/* Group Photo Section */}
-      <section className="relative">
-        <div className="w-full overflow-hidden relative">
-          {/* Top gradient fade */}
-          <div className="absolute top-0 left-0 right-0 h-48 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent z-10"></div>
-
-          <Image
-            src="/selfie_kickoff-extended.jpg"
-            alt="Meraki community group photo"
-            width={1920}
-            height={700}
-            className="w-full h-auto max-h-[85vh] object-cover"
-            style={{ objectPosition: 'center 70%' }}
-            priority
-          />
-
-          {/* Overlay text */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span className="text-white text-[22vw] md:text-[16vw] font-bold opacity-40 tracking-tight drop-shadow-2xl">
-              <span className="text-outline">M</span>eraki
-            </span>
+      <section className="relative -mt-12 md:-mt-16">
+        <div className="relative">
+          <div
+            className="w-full mt-0 mb-10 overflow-hidden"
+          >
+            <Image
+              src="/selfie_kickoff-extended.png"
+              alt="Meraki community group photo"
+              width={1920}
+              height={700}
+              className="w-full h-auto object-cover img-vintage-strong"
+              style={{ objectPosition: 'center center' }}
+              priority
+            />
           </div>
         </div>
 
@@ -155,17 +166,15 @@ export default function Home() {
         </div>
 
         <div className="max-w-6xl mx-auto text-center relative z-10">
-          <p className="text-3xl md:text-5xl leading-tight md:leading-snug">
-            <span className="text-[#B85C38] mr-3">•</span>
-            An open collective <em>of</em> makers, artists, engineers,
-            <br className="hidden lg:block" />
-            designers, writers, poets, <span className="text-[#8BA360] mx-2">•</span> and everything <span className="text-[#D4B055] mx-2">•</span> <em>in-between</em>.
-          </p>
+          <h2 className="text-3xl md:text-5xl leading-tight md:leading-snug">
+            A live, IRL co-working session for people who want to <em>make stuff</em>.
+          </h2>
 
-          <p className="mt-16 text-sm text-gray-400 max-w-xl mx-auto font-serif leading-relaxed">
-            Meraki is a live, IRL co-working session hosted in Toronto bringing
-            <br className="hidden md:block" />
-            together people who want to <em>make stuff</em>, and <a href="https://luma.com/merakiuoft" className="underline hover:text-[#B85C38] transition-colors">you're invited</a>.
+          <p className="mt-10 text-base md:text-lg text-gray-300 max-w-xl mx-auto font-serif leading-relaxed">
+            We host in Toronto and bring together folks working on passion projects.
+          </p>
+          <p className="mt-4 text-base md:text-lg text-gray-300 max-w-xl mx-auto font-serif leading-relaxed">
+            If that sounds like you, <a href="https://luma.com/merakiuoft" className="underline hover:text-[#B85C38] transition-colors">you're invited</a>.
           </p>
         </div>
       </section>
@@ -187,51 +196,6 @@ export default function Home() {
             We know it can be intimidating to start (we've been there), but you'll be surrounded by others doing the same.
           </p>
 
-          {/* Photo Collage */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 relative">
-            <div className="aspect-[3/4] overflow-hidden rounded-lg">
-              <Image
-                src="/1517_guy.jpg"
-                alt="Community member working"
-                width={300}
-                height={400}
-                className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="aspect-[3/4] overflow-hidden rounded-lg mt-8">
-              <Image
-                src="/group_talking.jpg"
-                alt="Group discussion"
-                width={300}
-                height={400}
-                className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="aspect-[3/4] overflow-hidden rounded-lg">
-              <Image
-                src="/intro_speech.jpg"
-                alt="Introduction speech"
-                width={300}
-                height={400}
-                className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="aspect-[3/4] overflow-hidden rounded-lg mt-8">
-              <Image
-                src="/group_talking_2.jpg"
-                alt="Networking"
-                width={300}
-                height={400}
-                className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-
-            {/* Decorative doodles */}
-            <svg className="absolute top-1/4 right-0 w-24 h-24 pointer-events-none" viewBox="0 0 100 100">
-              <path d="M10,50 Q30,20 50,50 T90,50" className="doodle-arrow" />
-              <path d="M50,10 Q80,30 50,50 T50,90" className="doodle-arrow" />
-            </svg>
-          </div>
         </div>
       </section>
 
@@ -239,55 +203,22 @@ export default function Home() {
       <section id="how" className="py-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Photos */}
+            {/* Join CTA */}
             <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <Image
-                      src="/demo_session_1.jpg"
-                      alt="Session introduction"
-                      width={300}
-                      height={225}
-                      className="w-full h-full object-cover img-vintage"
-                    />
-                  </div>
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <Image
-                      src="/demo_session_2.jpg"
-                      alt="Work session"
-                      width={300}
-                      height={225}
-                      className="w-full h-full object-cover img-vintage"
-                    />
-                  </div>
-                </div>
-                <div className="space-y-4 mt-8">
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <Image
-                      src="/demo_session_3.jpg"
-                      alt="Demo presentations"
-                      width={300}
-                      height={225}
-                      className="w-full h-full object-cover img-vintage"
-                    />
-                  </div>
-                  <div className="aspect-square overflow-hidden rounded-lg bg-[#1a1a1a] flex items-end p-4">
-                    <div>
-                      <div className="mb-2">
-                        <svg viewBox="0 0 40 60" className="w-8 h-12">
-                          <circle cx="20" cy="10" r="8" fill="none" stroke="#f5f5f5" strokeWidth="1.5" />
-                          <line x1="20" y1="18" x2="20" y2="40" stroke="#f5f5f5" strokeWidth="1.5" />
-                          <line x1="20" y1="25" x2="10" y2="32" stroke="#f5f5f5" strokeWidth="1.5" />
-                          <line x1="20" y1="25" x2="30" y2="32" stroke="#f5f5f5" strokeWidth="1.5" />
-                          <line x1="20" y1="40" x2="12" y2="55" stroke="#f5f5f5" strokeWidth="1.5" />
-                          <line x1="20" y1="40" x2="28" y2="55" stroke="#f5f5f5" strokeWidth="1.5" />
-                        </svg>
-                      </div>
-                      <p className="text-sm font-medium">Join Us &lt;3</p>
-                    </div>
-                  </div>
-                </div>
+              <div className="rounded-3xl border border-[#333] bg-[#121212] p-10 text-center">
+                <p className="text-sm uppercase tracking-[0.25em] text-gray-500 mb-6">Ready to join?</p>
+                <p className="text-xl md:text-2xl font-medium mb-8">
+                  Show up, share progress, and meet other makers.
+                </p>
+                <a
+                  href="https://luma.com/merakiuoft"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-[#B85C38] text-[#0a0a0a] rounded-full text-sm font-medium tracking-wide uppercase hover:bg-[#d06a40] transition-colors"
+                >
+                  <ArrowUpRight className="w-4 h-4" />
+                  Join Us
+                </a>
               </div>
             </div>
 
@@ -309,9 +240,50 @@ export default function Home() {
               </p>
 
               <p className="text-gray-400 leading-relaxed">
-                The real magic is in the demos – whether you've got 3 bullet points on a Google Docs or a full-blown prototype, we want to see it. It's a chance to share your work, get feedback, and celebrate your progress. And of course, make new friends.
+                The real magic is in the demos – whether you've got 3 bullet points on a Google Docs or a full-blown prototype, we want to see it.
+              </p>
+              <p className="text-gray-400 leading-relaxed mt-4">
+                It's a chance to share your work, get feedback, and celebrate progress.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-24 px-6 md:px-12 lg:px-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="mb-8">
+            <PillButton icon={<Sparkles className="w-4 h-4" />} color="olive">
+              Gallery
+            </PillButton>
+          </div>
+
+          <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-4 max-w-4xl">
+            A growing wall of moments from Meraki nights.
+          </h2>
+          <p className="text-lg text-gray-400 mb-4 max-w-2xl">
+            People show up with sketches, laptops, canvases, and prototypes.
+          </p>
+          <p className="text-gray-400 mb-12 max-w-2xl">
+            This is what it looks like when the room is full of makers building side by side.
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryImages.map((image) => (
+              <div
+                key={image.src}
+                className="aspect-[4/3] overflow-hidden rounded-2xl photo-fade"
+              >
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={520}
+                  height={390}
+                  className="w-full h-full object-cover img-vintage hover:scale-105 transition-transform duration-500 photo-fade-img"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -341,7 +313,7 @@ export default function Home() {
               href="https://www.socratica.info/map?location=toronto-Meraki"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 px-4 py-2 rounded-full bg-[#1a1a1a] border border-[#333] text-sm hover:bg-[#252525] transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#1a1a1a] border border-[#333] text-lg hover:bg-[#252525] transition-colors"
             >
               <MapPin className="w-3 h-3" />
               Toronto, ON
