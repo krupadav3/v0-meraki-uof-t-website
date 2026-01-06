@@ -87,7 +87,7 @@ export default function Home() {
           {/* Tagline */}
           <div className="max-w-xl mb-10">
             <p className="text-xl md:text-2xl leading-relaxed text-gray-300">
-              We run weekly co-working sessions where you can focus on your{" "}
+              Find your rhythm, co-work, and build alongside others.{" "}
               <em className="font-normal text-[#f5f5f5]">passion projects</em> with likeminded people.
             </p>
           </div>
